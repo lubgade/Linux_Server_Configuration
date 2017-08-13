@@ -42,5 +42,14 @@ URL: [Link](http://ec2-54-166-229-106.compute-1.amazonaws.com)
   * Turn on the firewall `sudo ufw enable`
 * Configure key based authentication for user 'grader':
   * On the local machine generate SSH key pair using `ssh-keygen`
+  * On another terminal login to grader account using password set during user creation `ssh -v grader@54.166.229.106 -p 2200`
+  * Create .ssh directory `mkdir .ssh`
+  * Create file to store key `touch /.ssh/authorized_keys`
+  * Copy contents of generated key 'graderkey' from local machine in the file you just created 
+  * Set permission for the file `chmod 700 .ssh ` `chmod 644 .ssh/authorized_keys`
+  * Change `PasswordAuthentication` to no `nano /etc/ssh/sshd_config`
+  * login with key pair `ssh grader@54.166.229.106 -p 2200 -i ~/.ssh/graderkey`
+* Configure local timezone to UTC `sudo dpkg-reconfigure tzdata`
+* Install and configure Apache to serve a Python mod__wsgi 
  
   
