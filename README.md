@@ -75,5 +75,100 @@ URL: [Link](http://ec2-54-166-229-106.compute-1.amazonaws.com)
      ```
 * Install Flask
   * `sudo apt-get install python-pip`
+  * `sudo pip install virtualenv`
+  * `sudo virtualenv venv`
+  * `sudo chmod -R 777 venv`
+  * `source venv/bin/activate`
+  * `pip install flask`
+  * `sudo python __init.py__`
+  * It should display " Running on http://localhost:5000/" or "Running on http://127.0.0.1:5000/ which means the app has been configured properly.
+  * To deactivate the environmaent `deactivate`
+* Configure and enable new virtual host:
+  * Create host config file `sudo nano /etc/apache2/sites-available/catalog.conf`
+  * Add the following lines of code to the file:
+   ```python
+ <VirtualHost *:80>
+  ServerName 34.201.114.178
+  ServerAdmin admin@34.201.114.178
+  WSGIScriptAlias / /var/www/catalog/catalog.wsgi
+  <Directory /var/www/catalog/catalog/>
+      Order allow,deny
+      Allow from all
+  </Directory>
+  Alias /static /var/www/catalog/catalog/static
+  <Directory /var/www/catalog/catalog/static/>
+      Order allow,deny
+      Allow from all
+  </Directory>
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  LogLevel warn
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+ </VirtualHost>
+```
+  * Save and close the file
+  * Enable virtual host `sudo a2ensite catalog`
+* Create wsgi file
+  * `cd /var/www/catalog`
+  * `sudo nano catalog.wsgi`
+  ```python
+  #!/usr/bin/python
+  import sys
+  import logging
+  
+  activate_this = '/var/www/catalog/catalog/venv/bin/activate_this.py`
+  execfile(activate_this, dict(__file__=activate_this)
+  
+  logging.basicConfig(stream=sys.stderr)
+  sys.path.insert(0,"/var/www/catalog/")
+
+  from catalog import app as application
+  application.secret_key = 'Add your secret key'
+  ```
+  * save file
+  * `sudo service apache2 restart`
+* Clone github repo:
+  * `sudo gitclone https://github.com/lubgade/item_catalog`
+  * Make sure to get all the hidden files `shopt -s dotglob`
+  * Move files from clone directory to catalog `mv /var/www/catalog/item_catalog/* /var/www/catalog/catalog/`
+  * remove clone directory `sudo rm -r item_catalog`
+* Make .git inaccessible
+  * from `cd /var/www/catalog/` create .htaccess file `sudo nano .htaccess`
+  * paste in `RedirectMatch 404/\.git`
+  * save file
+* Install dependencies:
+  * `source venv/bin/activate`
+  * `pip install httplib2`
+  * `pip install requests`
+  * `sudo pip install --upgrade ouath2client`
+  * `sudo pip install sqlalchemy`
+  * `pip install Flask-SQLAlchemy`
+  * `sudo pip install python-psycopg2`
+  * `pip install PIL`
+  * `pip install Image`
+* Install and configure PostgreSQL:
+  * Install postgres `sudo apt-get install postgresql`
+  * Install additional models `sudo apt-get install postgresql-contrib`
+  * Config database_setup.py `sudo nano database_setup.py`
+  * `engine = create_engine('postgresql://catalog:catalog-password@localhost/jewelrydb')`
+  * Repeat for project.py
+  * Copy project.py file to __init__.py `sudo mv project.py __init__.py`
+  * Add user catalog `sudo adduser catalog`
+  * Login as postgres super user `sudo su - postgres`
+  * Enter postgres `psql`
+  * Create user catalog `CREATE USER catalo WITH PASSWORD 'catalog-password';`
+  * Change role of user catalog to createDB `ALTER USER catalog CREATEDB;`
+  * List all users to verif `\du`
+  * Create new database with owner catalog `CREATE DATABASE jewelrydb WITH OWNER catalog;`
+  * Connect to database `\c jewelrydb`
+  * Revoke all rights `REVOKE ALL ON SCHEMA public FROM public;`
+  * Give access to user catalog `GRANT ALL ON SCHEMA public TO catalog;`
+  * Exit postgres `\q`
+  * Logout from postgres super user `exit`
+  * Setup your database schema `python database_setup.py`
+* Fix OAuth to work with hosted application:
+  * 
+
+  
+  
  
   
