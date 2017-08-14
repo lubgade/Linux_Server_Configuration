@@ -50,6 +50,11 @@ URL: [Link](http://ec2-54-166-229-106.compute-1.amazonaws.com)
   * Change `PasswordAuthentication` to no `nano /etc/ssh/sshd_config`
   * login with key pair `ssh grader@54.166.229.106 -p 2200 -i ~/.ssh/graderkey`
 * Configure local timezone to UTC `sudo dpkg-reconfigure tzdata`
-* Install and configure Apache to serve a Python mod__wsgi 
+* Install and configure Apache to serve a Python mod_wsgi application
+  * Install Apache `sudo apt-get install apache2`. Confirm Apache is working by visiting your public IP address
+  * Install mod_wsgi `sudo apt-get install libapache2-mod-wsgi python-dev`
+  * Verify wsgi is enabled `sudo a2enmod wsgi`
+  * Restart Apache `sudo apache2ctl restart`
+*   
  
   
