@@ -55,6 +55,25 @@ URL: [Link](http://ec2-54-166-229-106.compute-1.amazonaws.com)
   * Install mod_wsgi `sudo apt-get install libapache2-mod-wsgi python-dev`
   * Verify wsgi is enabled `sudo a2enmod wsgi`
   * Restart Apache `sudo apache2ctl restart`
-*   
+* Install git `sudo apt-get install git`
+* Create Flask app (source: [Digitalocean](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
+  * `cd /var/www`
+  * `sudo mkdir catalog`
+  * `cd catalog`
+  * `sudo mkdir catalog`
+  * `cd catalog`
+  * `sudo mkdir static templates`
+  * `sudo nano __init.py__`
+     ```python
+     from flask import Flask
+     app = Flask(__name__)
+     @app.route("/")
+     def hello():
+         return "Hello, world (Testing!)"
+     if __name__ == "__main__":
+        app.run()
+     ```
+* Install Flask
+  * `sudo apt-get install python-pip`
  
   
