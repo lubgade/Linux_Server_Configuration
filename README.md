@@ -169,8 +169,14 @@ URL: [Link](http://ec2-54-166-229-106.compute-1.amazonaws.com)
   * Go to [link](http://www.hcidata.info/host2ip.cgi) to get your host name by entering your public IP address
   * Open Apache config file `sudo nano /etc/apache2/sites-available/catalog.conf`
   * Below `ServerAdmin` paste `ServerAlias YOURHOSTNAME`
+  * In google developer console add your host name and IP address to Authorized Javascript origins and Authorized redirect URI's. 
+  * Download the updated client_secrets json & update in __init__.py(your old python.py)
   * Enable virtual host `sudo a2ensite catalog`
+* To upload image files for the app item_catalog:
+  * Change owner of all files in the project from root to the user www-data which Apache web server uses  
+  `sudo chown -R www-data:www-data /var/www/catalog`
   * Restart Apache server `sudo service apache2 restart`
+  
   
 
   
