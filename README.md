@@ -166,7 +166,12 @@ URL: [Link](http://ec2-54-166-229-106.compute-1.amazonaws.com)
   * Logout from postgres super user `exit`
   * Setup your database schema `python database_setup.py`
 * Fix OAuth to work with hosted application:
-  * 
+  * Go to [link](http://www.hcidata.info/host2ip.cgi) to get your host name by entering your public IP address
+  * Open Apache config file `sudo nano /etc/apache2/sites-available/catalog.conf`
+  * Below `ServerAdmin` paste `ServerAlias YOURHOSTNAME`
+  * Enable virtual host `sudo a2ensite catalog`
+  * Restart Apache server `sudo service apache2 restart`
+  
 
   
   
