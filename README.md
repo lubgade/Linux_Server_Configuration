@@ -164,6 +164,14 @@ URL: [Link](http://ec2-54-166-229-106.compute-1.amazonaws.com)
   * Give access to user catalog `GRANT ALL ON SCHEMA public TO catalog;`
   * Exit postgres `\q`
   * Logout from postgres super user `exit`
+  * Make sure no remote connections to the database are allowed by checking the host based authentication file  
+  `sudo nano /etc/postgresql/9.5/main/pg_hba.conf`. It should look like this:
+  ```python
+   local   all             postgres                                peer
+   local   all             all                                     peer
+   host    all             all             127.0.0.1/32            md5
+   host    all             all             ::1/128                 md5
+  ```
   * Setup your database schema `python database_setup.py`
 * Fix OAuth to work with hosted application:
   * Go to [link](http://www.hcidata.info/host2ip.cgi) to get your host name by entering your public IP address
