@@ -87,24 +87,24 @@ URL: [Link](http://ec2-54-166-229-106.compute-1.amazonaws.com)
   * Create host config file `sudo nano /etc/apache2/sites-available/catalog.conf`
   * Add the following lines of code to the file:
    ```python
- <VirtualHost *:80>
-  ServerName 34.201.114.178
-  ServerAdmin admin@34.201.114.178
-  WSGIScriptAlias / /var/www/catalog/catalog.wsgi
-  <Directory /var/www/catalog/catalog/>
+    <VirtualHost *:80>
+    ServerName 34.201.114.178
+    ServerAdmin admin@34.201.114.178
+    WSGIScriptAlias / /var/www/catalog/catalog.wsgi
+    <Directory /var/www/catalog/catalog/>
       Order allow,deny
       Allow from all
-  </Directory>
-  Alias /static /var/www/catalog/catalog/static
-  <Directory /var/www/catalog/catalog/static/>
+    </Directory>
+    Alias /static /var/www/catalog/catalog/static
+    <Directory /var/www/catalog/catalog/static/>
       Order allow,deny
       Allow from all
-  </Directory>
-  ErrorLog ${APACHE_LOG_DIR}/error.log
-  LogLevel warn
-  CustomLog ${APACHE_LOG_DIR}/access.log combined
- </VirtualHost>
-```
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    LogLevel warn
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>
+   ```
   * Save and close the file
   * Enable virtual host `sudo a2ensite catalog`
 * Create wsgi file
