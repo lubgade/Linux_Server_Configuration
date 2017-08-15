@@ -183,7 +183,13 @@ URL: [Link](http://ec2-54-166-229-106.compute-1.amazonaws.com)
 * To upload image files for the app item_catalog:
   * Change owner of all files in the project from root to the user www-data which Apache web server uses  
   `sudo chown -R www-data:www-data /var/www/catalog`
-  * Restart Apache server `sudo service apache2 restart`
+* Restart Apache server to launch the app `sudo service apache2 restart`
+
+## References 
+* https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps
+* https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
+* http://flask.pocoo.org/docs/0.12/deploying/mod_wsgi/#installing-mod-wsgi
+* https://code.google.com/archive/p/modwsgi/wikis/ApplicationIssues.wiki#Application_Working_Directory
   
   
 
